@@ -17,6 +17,7 @@ public class RoupaService {
     }
 
     public Roupa criar(Roupa roupa) {
+        System.out.println(">>> SALVANDO ROUPA NO MONGO: " + roupa);
         return roupaRepository.save(roupa);
     }
 
