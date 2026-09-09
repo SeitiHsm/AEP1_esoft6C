@@ -52,6 +52,7 @@ public class MenuConsole implements CommandLineRunner{
 
                 case 0:
                     sair();
+                    opcao = -1;
                     break;
 
                 default:
