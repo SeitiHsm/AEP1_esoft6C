@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClothIn | Gestão de doações</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app-container">
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <div class="brand-icon">C</div>
+            <div><h1>ClothIn</h1><span>Gestão de doações</span></div>
+        </div>
+
+        <div class="menu-label">MENU PRINCIPAL</div>
+        <nav class="navigation">
+            <button class="nav-item active" data-page="dashboard"><span class="nav-icon">▦</span>Painel</button>
+            <button class="nav-item" data-page="usuarios"><span class="nav-icon">♙</span>Usuários</button>
+            <button class="nav-item" data-page="doacoes"><span class="nav-icon">♧</span>Doações</button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="footer-mark">C</div>
+            <div><strong>ClothIn</strong><span>Consumo responsável</span></div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+                <div>
+                    <span class="breadcrumb">ClothIn / <span id="breadcrumbPage">Painel</span></span>
+                    <h2 id="pageTitle">Painel geral</h2>
+                </div>
+            </div>
+            <div class="system-status"><span class="status-dot"></span>Sistema</div>
+        </header>
+
+        <!-- PAINEL -->
+        <section class="page-content" id="dashboardPage">
+            <div class="welcome-section">
+                <div>
+                    <span class="eyebrow">VISÃO GERAL</span>
+                    <h2>Bem-vindo ao ClothIn!</h2>
+                    <p>Acompanhe os usuários e as doações cadastradas no sistema.</p>
+                </div>
+                <div class="welcome-decoration">C</div>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <div class="stat-top"><span class="stat-label">Total de usuários</span><span class="stat-icon blue">♙</span></div>
+                    <strong class="stat-number" id="totalUsuarios">—</strong>
+                    <span class="stat-description">Usuários cadastrados</span>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-top"><span class="stat-label">Total de doações</span><span class="stat-icon purple">♧</span></div>
+                    <strong class="stat-number" id="totalDoacoes">—</strong>
+                    <span class="stat-description">Doações registradas</span>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-top"><span class="stat-label">Doações pendentes</span><span class="stat-icon orange">◷</span></div>
+                    <strong class="stat-number" id="totalPendentes">—</strong>
+                    <span class="stat-description">Aguardando recebimento</span>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-top"><span class="stat-label">Concluídas</span><span class="stat-icon green">✓</span></div>
+                    <strong class="stat-number" id="totalConcluidas">—</strong>
+                    <span class="stat-description">Doações finalizadas</span>
+                </article>
+            </div>
+
+            <div class="dashboard-grid">
+                <section class="panel">
+                    <div class="panel-heading"><div><h3>Situação das doações</h3><p>Distribuição por status</p></div></div>
+                    <div class="status-list" id="statusList"><p class="loading-message">Carregando informações...</p></div>
+                </section>
+                <section class="panel">
+                    <div class="panel-heading"><div><h3>Visão geral</h3><p>Informações do ClothIn</p></div></div>
+                    <div class="overview-item"><div class="overview-icon">♙</div><div><strong>Doadores e responsáveis</strong><p>Gerenciamento dos usuários do sistema.</p></div></div>
+                    <div class="overview-item"><div class="overview-icon">♧</div><div><strong>Controle de doações</strong><p>Acompanhamento das roupas recebidas.</p></div></div>
+                    <div class="overview-item"><div class="overview-icon">✓</div><div><strong>Consumo responsável</strong><p>Incentivando a reutilização de roupas.</p></div></div>
+                </section>
+            </div>
+            <div class="dashboard-footer"><span>ClothIn — Sistema de gerenciamento de doações</span><span>ODS 12 · Consumo e Produção Responsáveis</span></div>
+        </section>
+
+        <!-- USUÁRIOS -->
+        <section class="page-content" id="usuariosPage" hidden>
+            <div class="section-heading">
+                <div><span class="eyebrow">GERENCIAMENTO</span><h2>Usuários</h2><p>Gerencie os doadores e responsáveis cadastrados no ClothIn.</p></div>
+                <button class="primary-button" id="btnNovoUsuario">＋ Novo usuário</button>
+            </div>
+
+            <div class="user-summary">
+                <div class="user-summary-item"><span>Total de usuários</span><strong id="usuariosTotal">0</strong></div>
+                <div class="user-summary-item"><span>Doadores</span><strong id="usuariosDoadores">0</strong></div>
+                <div class="user-summary-item"><span>Responsáveis</span><strong id="usuariosResponsaveis">0</strong></div>
+            </div>
+
+            <section class="panel users-panel">
+                <div class="users-toolbar">
+                    <div><h3>Usuários cadastrados</h3><p>Consulte e gerencie os usuários do sistema.</p></div>
+                    <div class="user-filters">
+                        <input type="search" id="pesquisaUsuario" placeholder="Pesquisar nome ou e-mail...">
+                        <select id="filtroTipoUsuario">
+                            <option value="">Todos os tipos</option>
+                            <option value="DOADOR">Doadores</option>
+                            <option value="RESPONSAVEL">Responsáveis</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="users-table">
+                        <thead><tr><th>USUÁRIO</th><th>E-MAIL</th><th>TELEFONE</th><th>TIPO</th><th>AÇÕES</th></tr></thead>
+                        <tbody id="usuariosTableBody"><tr><td colspan="5" class="table-message">Carregando usuários...</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="table-footer"><span id="usuariosResultado">Carregando...</span><button class="secondary-button" id="btnAtualizarUsuarios">↻ Atualizar lista</button></div>
+            </section>
+        </section>
+
+        <!-- DOAÇÕES -->
+        <section class="page-content" id="doacoesPage" hidden>
+            <div class="section-heading">
+                <div><span class="eyebrow">GERENCIAMENTO</span><h2>Doações</h2><p>Cadastre e acompanhe as doações de roupas.</p></div>
+                <button class="primary-button" id="btnNovaDoacao">＋ Nova doação</button>
+            </div>
+
+            <div class="user-summary">
+                <div class="user-summary-item"><span>Total de doações</span><strong id="doacoesTotal">0</strong></div>
+                <div class="user-summary-item"><span>Pendentes</span><strong id="doacoesPendentes">0</strong></div>
+                <div class="user-summary-item"><span>Concluídas</span><strong id="doacoesConcluidas">0</strong></div>
+            </div>
+
+            <section class="panel users-panel">
+                <div class="users-toolbar">
+                    <div><h3>Doações cadastradas</h3><p>Consulte, filtre e gerencie as doações.</p></div>
+                    <div class="user-filters">
+                        <input type="search" id="pesquisaDoacao" placeholder="Pesquisar doador...">
+                        <select id="filtroStatusDoacao">
+                            <option value="">Todos os status</option>
+                            <option value="PENDENTE">Pendente</option>
+                            <option value="RECEBIDA">Recebida</option>
+                            <option value="EM_TRIAGEM">Em triagem</option>
+                            <option value="DISPONIVEL">Disponível</option>
+                            <option value="CONCLUIDA">Concluída</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="users-table donations-table">
+                        <thead><tr><th>DOADOR</th><th>RESPONSÁVEL</th><th>DATA</th><th>ROUPAS</th><th>STATUS</th><th>AÇÕES</th></tr></thead>
+                        <tbody id="doacoesTableBody"><tr><td colspan="6" class="table-message">Carregando doações...</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="table-footer"><span id="doacoesResultado">Carregando...</span><button class="secondary-button" id="btnAtualizarDoacoes">↻ Atualizar lista</button></div>
+            </section>
+        </section>
+    </main>
+</div>
+
+<!-- MODAL USUÁRIO -->
+<div class="modal-overlay" id="usuarioModal" hidden>
+    <div class="modal">
+        <div class="modal-header">
+            <div><span class="eyebrow">GERENCIAMENTO</span><h2 id="modalTitulo">Novo usuário</h2><p>Preencha as informações do usuário.</p></div>
+            <button class="modal-close" id="btnFecharModal" aria-label="Fechar">×</button>
+        </div>
+        <form id="usuarioForm">
+            <div class="form-group"><label for="nomeUsuario">Nome completo</label><input id="nomeUsuario" type="text" maxlength="100" required></div>
+            <div class="form-group"><label for="emailUsuario">E-mail</label><input id="emailUsuario" type="email" maxlength="150" required></div>
+            <div class="form-group"><label for="telefoneUsuario">Telefone</label><input id="telefoneUsuario" type="tel" maxlength="20" required></div>
+            <div class="form-group"><label for="tipoUsuario">Tipo de usuário</label><select id="tipoUsuario" required><option value="">Selecione</option><option value="DOADOR">Doador</option><option value="RESPONSAVEL">Responsável</option></select></div>
+            <div class="modal-actions"><button type="button" class="secondary-button" id="btnCancelarModal">Cancelar</button><button type="submit" class="primary-button" id="btnSalvarUsuario">Salvar usuário</button></div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DOAÇÃO -->
+<div class="modal-overlay" id="doacaoModal" hidden>
+    <div class="modal modal-wide">
+        <div class="modal-header">
+            <div><span class="eyebrow">GERENCIAMENTO</span><h2 id="doacaoModalTitulo">Nova doação</h2><p>Informe os dados da doação e adicione as roupas.</p></div>
+            <button class="modal-close" id="btnFecharDoacaoModal" aria-label="Fechar">×</button>
+        </div>
+
+        <form id="doacaoForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="doacaoDoador">Doador</label>
+                    <select id="doacaoDoador" required><option value="">Selecione um doador</option></select>
+                </div>
+                <div class="form-group">
+                    <label for="doacaoResponsavel">Responsável <span class="optional-label">(opcional)</span></label>
+                    <select id="doacaoResponsavel"><option value="">Nenhum responsável</option></select>
+                </div>
+            </div>
+
+            <div class="form-group" id="grupoStatusDoacao" hidden>
+                <label for="doacaoStatus">Status da doação</label>
+                <select id="doacaoStatus">
+                    <option value="PENDENTE">Pendente</option>
+                    <option value="RECEBIDA">Recebida</option>
+                    <option value="EM_TRIAGEM">Em triagem</option>
+                    <option value="DISPONIVEL">Disponível</option>
+                    <option value="CONCLUIDA">Concluída</option>
+                </select>
+            </div>
+
+            <div class="clothes-heading">
+                <div><h3>Roupas da doação</h3><p>Adicione uma ou mais peças.</p></div>
+                <button type="button" class="secondary-button" id="btnAdicionarRoupa">＋ Adicionar roupa</button>
+            </div>
+
+            <div id="listaRoupas" class="clothes-list"></div>
+
+            <div class="modal-actions">
+                <button type="button" class="secondary-button" id="btnCancelarDoacao">Cancelar</button>
+                <button type="submit" class="primary-button" id="btnSalvarDoacao">Salvar doação</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<script src="/js/script.js"></script>
+</body>
+</html>
