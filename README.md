@@ -356,7 +356,7 @@ Após realizar uma atualização ou exclusão, o MongoDB Compass pode ser atuali
 
 ## 3. Testes automatizados
 
-O projeto possui testes automatizados utilizando **JUnit 5**, **Mockito** e recursos de teste do Spring Boot.
+O projeto possui testes automatizados utilizando **JUnit 5**, **Mockito** e recursos de teste do Spring Boot (`@WebMvcTest`).
 
 Os testes estão localizados em:
 
@@ -364,14 +364,18 @@ Os testes estão localizados em:
 src/test/java/AEP/ClothIn
 ```
 
-Entre as classes de teste estão:
+As classes de teste implementadas são:
 
 ```text
+DoacaoControllerTest
+DoacaoServiceTest
 RoupaControllerTest
 RoupaServiceTest
+UsuarioControllerTest
+UsuarioServiceTest
 ```
 
-Os testes verificam o comportamento das principais funcionalidades implementadas nas camadas de Controller e Service.
+Os testes verificam o comportamento das regras de negócio e das rotas REST implementadas nas camadas de `Controller` e `Service` para usuários, roupas e doações.
 
 ### Executando os testes pelo IntelliJ IDEA
 
@@ -394,47 +398,47 @@ RoupaServiceTest
 
 Também é possível executar um método de teste individual utilizando o botão ▶ ao lado do método.
 
-Para executar todos os testes, é possível utilizar a opção de execução disponível na pasta de testes.
+Para executar todos os testes de uma vez, clique com o botão direito sobre a pasta `src/test/java/AEP/ClothIn` e selecione **Run 'Tests in 'AEP.ClothIn''** (ou **More Run/Debug > Run 'All Tests' with Coverage** para visualizar a cobertura diretamente na IDE).
 
-### Executando os testes pelo Maven
+### Executando os testes e gerando cobertura pelo Maven (JaCoCo)
 
-Outra forma de executar os testes é através do Maven.
+Outra forma de executar os testes e gerar a evidência reproduzível de cobertura de código é através do Maven.
 
 Abra o terminal dentro da pasta `ClothIn` e execute:
 
 ```bash
-mvn test
+./mvnw clean test
 ```
 
-O Maven irá compilar o projeto e executar os testes automatizados.
+O Maven irá compilar o projeto, executar todos os testes automatizados e gerar o relatório de cobertura via **JaCoCo**.
 
-Ao final da execução, o terminal deverá apresentar o resultado dos testes.
-
-Quando todos os testes forem executados sem falhas, o Maven apresentará:
+Ao final da execução, quando todos os testes forem aprovados, o terminal apresentará:
 
 ```text
 BUILD SUCCESS
 ```
 
-Caso algum teste apresente erro ou falha, o Maven indicará quais testes não foram aprovados.
-
-### Exemplo de teste
-
-Um dos testes pode verificar, por exemplo, se o cadastro de uma roupa chama corretamente o repositório para salvar o objeto.
-
-O fluxo do teste é:
+O relatório HTML detalhado de cobertura será gerado em:
 
 ```text
-Criar uma roupa
-       ↓
-Executar o método do Service
-       ↓
-Verificar a chamada do Repository
-       ↓
-Confirmar o resultado esperado
+target/site/jacoco/index.html
 ```
 
-Os testes automatizados permitem verificar o comportamento das funcionalidades sem precisar realizar manualmente cada operação pelo menu.
+Abra o arquivo `index.html` no navegador para conferir os percentuais de cobertura de instruções, ramificações, linhas, métodos e classes (atendendo ao mínimo obrigatório de **70%**).
+
+### Fluxo dos testes
+
+Os testes isolam as dependências utilizando mocks (`@Mock` e `@MockBean`) para validar tanto os fluxos de sucesso quanto as exceções e validações de negócio (como e-mail duplicado, usuário inexistente, doador/responsável inválido e lista de roupas vazia):
+
+```text
+Preparar dados e mocks
+         ↓
+Executar método do Service ou requisição MockMvc
+         ↓
+Verificar chamadas ao Repository / Service
+         ↓
+Confirmar retorno, status HTTP ou exceção esperada
+```
 
 ## API REST
 
