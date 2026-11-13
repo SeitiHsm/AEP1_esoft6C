@@ -1,118 +1,90 @@
 # ClothIn
 
-Sistema para cadastro e gerenciamento de roupas destinadas à doação e reutilização, desenvolvido como parte da Atividade de Estudo Programado (AEP).
+Sistema para cadastro e gerenciamento de roupas destinadas à doação e reutilização, desenvolvido como parte da Atividade de Estudo Programado (AEP) de Engenharia de Software.
 
-O **ClothIn** busca facilitar o gerenciamento de doações de roupas, permitindo organizar os usuários envolvidos, registrar peças e acompanhar o andamento das doações.
+O **ClothIn** tem como objetivo facilitar o gerenciamento de doações de roupas, organizando os usuários envolvidos, as peças cadastradas e o acompanhamento das doações.
 
-## Problema
+## 1. Problema
 
-O descarte de roupas que ainda estão em condições de uso contribui para o desperdício de recursos e reduz as possibilidades de reutilização dessas peças.
+O descarte de roupas que ainda estão em condições de uso contribui para o desperdício de recursos e dificulta a reutilização desses itens.
 
-Além disso, a falta de uma forma organizada para registrar e gerenciar roupas destinadas à doação pode dificultar o controle desses itens.
+Além disso, a falta de organização no processo de doação pode dificultar o controle das peças e o acompanhamento das pessoas envolvidas.
 
-O ClothIn surge como uma solução para auxiliar nesse gerenciamento, permitindo cadastrar usuários, registrar doações, incluir várias peças em uma mesma doação e acompanhar seus respectivos status.
+O ClothIn propõe uma solução para organizar esse processo por meio de uma aplicação que permite cadastrar usuários, registrar doações, incluir várias peças em uma mesma doação e acompanhar seus respectivos status.
 
-## ODS
+## 2. ODS relacionado
 
 O projeto está relacionado ao **ODS 12 – Consumo e Produção Responsáveis**.
 
-O ODS 12 busca promover padrões de consumo e produção mais sustentáveis, incentivando o uso consciente dos recursos e a redução de desperdícios.
+Esse objetivo busca promover padrões de consumo e produção mais sustentáveis, incentivando o uso consciente dos recursos e a redução do desperdício.
 
-O ClothIn contribui com esse objetivo ao incentivar a reutilização de roupas e facilitar o gerenciamento das peças destinadas à doação.
+O ClothIn contribui com essa proposta ao facilitar a organização e a reutilização de roupas destinadas à doação.
 
-## Objetivo
+## 3. Objetivo do projeto
 
-O objetivo do ClothIn é disponibilizar uma aplicação para organizar o processo de doação de roupas, desde o cadastro dos usuários até o acompanhamento das doações.
-
-A aplicação permite:
+Desenvolver uma aplicação para auxiliar no gerenciamento de doações de roupas, permitindo:
 
 - Cadastrar, consultar, atualizar e excluir usuários;
 - Identificar usuários como doadores ou responsáveis;
-- Cadastrar e gerenciar doações;
-- Associar um doador e, opcionalmente, um responsável a cada doação;
+- Registrar e gerenciar doações;
+- Associar doadores e responsáveis às doações;
 - Adicionar várias peças de roupa em uma mesma doação;
 - Atualizar e consultar o status das doações;
 - Filtrar doações por doador, responsável e status;
 - Armazenar os dados utilizando MongoDB;
-- Disponibilizar uma interface web para utilização do sistema;
-- Disponibilizar uma API REST para as operações.
+- Disponibilizar uma interface web para utilização do sistema.
 
-## Funcionalidades
+## 4. Evolução da segunda entrega
 
-### Gerenciamento de usuários
+Na primeira entrega, o foco do projeto foi desenvolver uma estrutura inicial para cadastro e gerenciamento de roupas, utilizando Java, Spring Boot e MongoDB.
 
-O sistema permite cadastrar e gerenciar os usuários envolvidos nas doações.
+Na segunda entrega, o ClothIn foi ampliado para oferecer um gerenciamento mais completo das doações.
 
-Cada usuário possui:
+As principais evoluções foram:
 
-- Nome;
-- E-mail;
-- Telefone;
-- Tipo de usuário.
+- Implementação do gerenciamento de usuários;
+- Implementação do gerenciamento de doações;
+- Relacionamento entre usuários e doações;
+- Armazenamento de várias peças em uma mesma doação por meio de documentos incorporados;
+- Ampliação da estrutura do banco de dados NoSQL;
+- Desenvolvimento de uma interface web;
+- Implementação de testes automatizados;
+- Documentação técnica e instruções de execução.
 
-Os tipos disponíveis são:
+## 5. Tecnologias utilizadas
 
-- `DOADOR`: usuário responsável por realizar a doação;
-- `RESPONSAVEL`: usuário responsável por acompanhar ou gerenciar a doação.
+- Java 21
+- Spring Boot
+- Spring Web
+- Spring Data MongoDB
+- MongoDB
+- HTML
+- CSS
+- JavaScript
+- Maven
+- JUnit 5
+- Mockito
+- JaCoCo
+- IntelliJ IDEA
+- Git e GitHub
 
-### Gerenciamento de doações
+## 6. Arquitetura do projeto
 
-O sistema permite registrar e gerenciar doações, associando cada uma a um doador e, opcionalmente, a um responsável.
-
-Uma doação pode conter várias peças de roupa, permitindo registrar diferentes itens em uma única operação.
-
-### Acompanhamento de status
-
-As doações possuem os seguintes status:
-
-| Status | Descrição |
-|---|---|
-| `PENDENTE` | Doação registrada e aguardando recebimento |
-| `RECEBIDA` | Doação recebida |
-| `EM_TRIAGEM` | Doação em processo de avaliação |
-| `DISPONIVEL` | Peças disponíveis para reutilização |
-| `CONCLUIDA` | Processo da doação concluído |
-
-### Painel principal
-
-A interface apresenta informações gerais sobre as doações, permitindo visualizar indicadores e acompanhar a situação dos registros.
-
-### Interface web
-
-O ClothIn possui uma interface web para facilitar a utilização das funcionalidades de usuários e doações, sem depender de operações diretamente pelo terminal.
-
-## Tecnologias
-
-- **Java 21**
-- **Spring Boot**
-- **Spring Web**
-- **Spring Data MongoDB**
-- **MongoDB**
-- **HTML**
-- **CSS**
-- **JavaScript**
-- **Maven**
-- **JUnit 5**
-- **Mockito**
-- **JaCoCo**
-- **IntelliJ IDEA**
-- **Git e GitHub**
-
-## Arquitetura
-
-O projeto utiliza uma organização em camadas, separando as responsabilidades da aplicação.
-
-O fluxo principal é:
+O projeto utiliza uma arquitetura organizada em camadas, separando as responsabilidades da aplicação.
 
 ```text
 Interface Web / Requisição HTTP
-              ↓
+              |
+              v
           Controller
-              ↓
+              |
+              v
            Service
-              ↓
+              |
+              v
          Repository
-              ↓
+              |
+              v
             MongoDB
 ```
 
@@ -120,7 +92,7 @@ Interface Web / Requisição HTTP
 
 Representa as entidades e estruturas de dados utilizadas pela aplicação.
 
-Entre os principais modelos estão:
+Principais modelos:
 
 - `Usuario`: representa os usuários cadastrados;
 - `Doacao`: representa uma doação;
@@ -128,25 +100,37 @@ Entre os principais modelos estão:
 
 ### Controller
 
-Recebe as requisições HTTP da API REST e direciona as operações para a camada de serviço.
+Recebe as requisições HTTP e direciona as operações para a camada de serviço.
 
 ### Service
 
-Concentra as regras de negócio, validações e operações realizadas sobre usuários e doações.
+Concentra as regras de negócio, validações e operações da aplicação.
 
 ### Repository
 
-Realiza a comunicação com o MongoDB utilizando o Spring Data MongoDB.
+Realiza a comunicação com o MongoDB por meio do Spring Data MongoDB.
 
 ### Interface Web
 
-A interface permite utilizar as funcionalidades do sistema por meio de páginas HTML, estilizadas com CSS e integradas ao backend através de JavaScript.
+Permite utilizar as funcionalidades do sistema através de páginas HTML, CSS e JavaScript.
 
-## Estrutura do banco de dados MongoDB
+## 7. Banco de dados MongoDB
 
-O ClothIn utiliza o **MongoDB** como banco de dados NoSQL.
+O ClothIn utiliza o MongoDB como banco de dados NoSQL.
 
-Nesta segunda entrega, a estrutura foi ampliada para trabalhar com duas coleções principais:
+**Nome do banco de dados:**
+
+```text
+ClothIn
+```
+
+**Endereço local padrão:**
+
+```text
+mongodb://localhost:27017/ClothIn
+```
+
+O projeto utiliza duas coleções principais:
 
 ```text
 ClothIn
@@ -154,104 +138,372 @@ ClothIn
 └── doacoes
 ```
 
-### Coleção `usuarios`
+### 7.1. Coleção `usuarios`
 
-Armazena os dados dos usuários cadastrados no sistema.
+Armazena os usuários cadastrados no sistema.
 
-| Campo | Descrição |
-|---|---|
-| `_id` | Identificador do usuário |
-| `nome` | Nome do usuário |
-| `email` | E-mail do usuário |
-| `telefone` | Telefone do usuário |
-| `tipoUsuario` | Tipo do usuário: `DOADOR` ou `RESPONSAVEL` |
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `_id` | ObjectId | Identificador do usuário |
+| `nome` | String | Nome do usuário |
+| `email` | String | E-mail |
+| `telefone` | String | Telefone |
+| `tipoUsuario` | String | Tipo do usuário |
+
+Tipos disponíveis:
+
+- `DOADOR`: usuário que realiza doações;
+- `RESPONSAVEL`: usuário responsável pelo acompanhamento das doações.
 
 Exemplo de documento:
 
-```json
+```javascript
 {
-  "_id": "ID_DO_USUARIO",
-  "nome": "Maria",
-  "email": "maria@email.com",
-  "telefone": "44999999999",
-  "tipoUsuario": "DOADOR"
+  _id: ObjectId("6b1000000000000000000001"),
+  nome: "Ana Martins",
+  email: "ana.martins@example.com",
+  telefone: "44990001001",
+  tipoUsuario: "DOADOR",
+  _class: "AEP.ClothIn.models.Usuario"
 }
 ```
 
-### Coleção `doacoes`
+### 7.2. Coleção `doacoes`
 
 Armazena as doações registradas no sistema.
 
-| Campo | Descrição |
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `_id` | ObjectId | Identificador da doação |
+| `doadorId` | String | Identificador do usuário doador |
+| `responsavelId` | String | Identificador do responsável |
+| `data` | Date | Data da doação |
+| `status` | String | Situação atual da doação |
+| `roupas` | Array | Lista de peças incorporadas |
+
+Status disponíveis:
+
+- `PENDENTE`
+- `RECEBIDA`
+- `EM_TRIAGEM`
+- `DISPONIVEL`
+- `CONCLUIDA`
+
+Cada objeto dentro de `roupas` possui:
+
+| Campo | Tipo |
 |---|---|
-| `_id` | Identificador da doação |
-| `doadorId` | Identificador do usuário doador |
-| `responsavelId` | Identificador do responsável, quando associado |
-| `data` | Data da doação |
-| `status` | Situação atual da doação |
-| `roupas` | Lista de peças incorporadas à doação |
+| `tipo` | String |
+| `tamanho` | String |
+| `cor` | String |
+| `estado` | String |
 
 Exemplo de documento:
 
-```json
+```javascript
 {
-  "_id": "ID_DA_DOACAO",
-  "doadorId": "ID_DO_USUARIO",
-  "responsavelId": "ID_DO_RESPONSAVEL",
-  "data": "2026-11-09",
-  "status": "RECEBIDA",
-  "roupas": [
+  _id: ObjectId("6b2000000000000000000001"),
+  doadorId: "6b1000000000000000000001",
+  responsavelId: "6b1000000000000000000002",
+  data: ISODate("2026-11-01T12:00:00.000Z"),
+  status: "RECEBIDA",
+  roupas: [
     {
-      "tipo": "Camiseta",
-      "tamanho": "G",
-      "cor": "Azul",
-      "estado": "Bom"
+      tipo: "Camiseta",
+      tamanho: "M",
+      cor: "Azul",
+      estado: "Bom"
     },
     {
-      "tipo": "Calça",
-      "tamanho": "G",
-      "cor": "Preta",
-      "estado": "Ótimo"
+      tipo: "Calça",
+      tamanho: "40",
+      cor: "Preta",
+      estado: "Ótimo"
     }
-  ]
+  ],
+  _class: "AEP.ClothIn.models.Doacao"
 }
 ```
 
-### Relacionamento entre as coleções
+### 7.3. Relacionamento entre as coleções
 
-O relacionamento entre usuários e doações é realizado por meio dos identificadores dos usuários.
+O relacionamento entre usuários e doações é realizado por meio dos identificadores:
 
-- Um usuário do tipo `DOADOR` pode estar associado a várias doações.
-- Cada doação possui um doador identificado por `doadorId`.
-- Uma doação pode possuir um responsável identificado por `responsavelId`.
-- Uma doação pode conter várias peças de roupa dentro do campo `roupas`.
+- Um usuário do tipo `DOADOR` pode estar associado a várias doações;
+- Cada doação possui um doador identificado por `doadorId`;
+- Uma doação pode possuir um responsável identificado por `responsavelId`;
+- Uma doação pode conter várias peças de roupa.
 
-As peças são armazenadas como documentos incorporados (*embedded documents*) dentro da própria coleção `doacoes`, não sendo necessário criar uma coleção separada para cada peça.
+As roupas são armazenadas diretamente dentro do documento da doação, utilizando documentos incorporados (*embedded documents*).
 
-Esse modelo permite manter os dados das roupas agrupados com a doação à qual pertencem.
+Assim, não é necessária uma terceira coleção para armazenar individualmente cada peça.
 
-## Instruções básicas de execução
+### 7.4. Preparação do MongoDB
 
-### 1. Requisitos
+Para executar a aplicação, é necessário possuir o MongoDB instalado e em execução localmente.
 
-Para executar o projeto, é necessário utilizar:
+O banco `ClothIn` e suas coleções podem ser criados automaticamente durante a primeira inserção de documentos.
+
+O avaliador pode utilizar o MongoDB Compass ou o `mongosh` para inserir os dados de demonstração.
+
+### 7.5. Dados fictícios para demonstração
+
+Os comandos abaixo criam um conjunto de dados fictícios para facilitar a avaliação do sistema.
+
+Eles inserem 10 usuários e 10 doações, com diferentes status e quantidades de roupas.
+
+Abra o `mongosh` e selecione o banco:
+
+```javascript
+use ClothIn
+```
+
+**Inserir usuários:**
+
+```javascript
+db.usuarios.insertMany([
+  {
+    _id: ObjectId("6b1000000000000000000001"),
+    nome: "Ana Martins",
+    email: "ana.martins@example.com",
+    telefone: "44990001001",
+    tipoUsuario: "DOADOR",
+    _class: "AEP.ClothIn.models.Usuario"
+  },
+  {
+    _id: ObjectId("6b1000000000000000000002"),
+    nome: "Bruno Costa",
+    email: "bruno.costa@example.com",
+    telefone: "44990001002",
+    tipoUsuario: "RESPONSAVEL",
+    _class: "AEP.ClothIn.models.Usuario"
+  },
+  {
+    _id: ObjectId("6b1000000000000000000003"),
+    nome: "Carla Souza",
+    email: "carla.souza@example.com",
+    telefone: "44990001003",
+    tipoUsuario: "DOADOR",
+    _class: "AEP.ClothIn.models.Usuario"
+  },
+  {
+    _id: ObjectId("6b1000000000000000000004"),
+    nome: "Diego Almeida",
+    email: "diego.almeida@example.com",
+    telefone: "44990001004",
+    tipoUsuario: "DOADOR",
+    _class: "AEP.ClothIn.models.Usuario"
+  },
+  {
+    _id: ObjectId("6b1000000000000000000005"),
+    nome: "Elisa Ferreira",
+    email: "elisa.ferreira@example.com",
+    telefone: "44990001005",
+    tipoUsuario: "RESPONSAVEL",
+    _class: "AEP.ClothIn.models.Usuario"
+  },
+  {
+    _id: ObjectId("6b1000000000000000000006"),
+    nome: "Felipe Rocha",
+    email: "felipe.rocha@example.com",
+    telefone: "44990001006",
+    tipoUsuario: "DOADOR",
+    _class: "AEP.ClothIn.models.Usuario"
+  },
+  {
+    _id: ObjectId("6b1000000000000000000007"),
+    nome: "Gabriela Lima",
+    email: "gabriela.lima@example.com",
+    telefone: "44990001007",
+    tipoUsuario: "DOADOR",
+    _class: "AEP.ClothIn.models.Usuario"
+  },
+  {
+    _id: ObjectId("6b1000000000000000000008"),
+    nome: "Heitor Nunes",
+    email: "heitor.nunes@example.com",
+    telefone: "44990001008",
+    tipoUsuario: "RESPONSAVEL",
+    _class: "AEP.ClothIn.models.Usuario"
+  },
+  {
+    _id: ObjectId("6b1000000000000000000009"),
+    nome: "Isabela Mendes",
+    email: "isabela.mendes@example.com",
+    telefone: "44990001009",
+    tipoUsuario: "DOADOR",
+    _class: "AEP.ClothIn.models.Usuario"
+  },
+  {
+    _id: ObjectId("6b1000000000000000000010"),
+    nome: "João Pedro Alves",
+    email: "joao.alves@example.com",
+    telefone: "44990001010",
+    tipoUsuario: "RESPONSAVEL",
+    _class: "AEP.ClothIn.models.Usuario"
+  }
+]);
+```
+
+**Inserir doações:**
+
+```javascript
+db.doacoes.insertMany([
+  {
+    _id: ObjectId("6b2000000000000000000001"),
+    doadorId: "6b1000000000000000000001",
+    responsavelId: "6b1000000000000000000002",
+    data: ISODate("2026-11-01T12:00:00.000Z"),
+    status: "RECEBIDA",
+    roupas: [
+      { tipo: "Camiseta", tamanho: "M", cor: "Azul", estado: "Bom" },
+      { tipo: "Calça", tamanho: "40", cor: "Preta", estado: "Ótimo" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  },
+  {
+    _id: ObjectId("6b2000000000000000000002"),
+    doadorId: "6b1000000000000000000003",
+    responsavelId: "6b1000000000000000000005",
+    data: ISODate("2026-11-02T12:00:00.000Z"),
+    status: "EM_TRIAGEM",
+    roupas: [
+      { tipo: "Jaqueta", tamanho: "G", cor: "Cinza", estado: "Bom" },
+      { tipo: "Blusa", tamanho: "P", cor: "Rosa", estado: "Bom" },
+      { tipo: "Cachecol", tamanho: "Único", cor: "Vermelho", estado: "Ótimo" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  },
+  {
+    _id: ObjectId("6b2000000000000000000003"),
+    doadorId: "6b1000000000000000000004",
+    responsavelId: "6b1000000000000000000002",
+    data: ISODate("2026-11-03T12:00:00.000Z"),
+    status: "PENDENTE",
+    roupas: [
+      { tipo: "Tênis", tamanho: "39", cor: "Branco", estado: "Bom" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  },
+  {
+    _id: ObjectId("6b2000000000000000000004"),
+    doadorId: "6b1000000000000000000006",
+    responsavelId: "6b1000000000000000000008",
+    data: ISODate("2026-11-04T12:00:00.000Z"),
+    status: "DISPONIVEL",
+    roupas: [
+      { tipo: "Moletom", tamanho: "G", cor: "Verde", estado: "Ótimo" },
+      { tipo: "Bermuda", tamanho: "42", cor: "Bege", estado: "Bom" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  },
+  {
+    _id: ObjectId("6b2000000000000000000005"),
+    doadorId: "6b1000000000000000000007",
+    responsavelId: "6b1000000000000000000005",
+    data: ISODate("2026-11-05T12:00:00.000Z"),
+    status: "CONCLUIDA",
+    roupas: [
+      { tipo: "Vestido", tamanho: "M", cor: "Estampado", estado: "Bom" },
+      { tipo: "Saia", tamanho: "38", cor: "Preta", estado: "Ótimo" },
+      { tipo: "Camiseta", tamanho: "M", cor: "Branca", estado: "Bom" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  },
+  {
+    _id: ObjectId("6b2000000000000000000006"),
+    doadorId: "6b1000000000000000000009",
+    responsavelId: "6b1000000000000000000010",
+    data: ISODate("2026-11-06T12:00:00.000Z"),
+    status: "RECEBIDA",
+    roupas: [
+      { tipo: "Camisa", tamanho: "G", cor: "Azul-marinho", estado: "Ótimo" },
+      { tipo: "Calça", tamanho: "42", cor: "Jeans", estado: "Bom" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  },
+  {
+    _id: ObjectId("6b2000000000000000000007"),
+    doadorId: "6b1000000000000000000001",
+    responsavelId: "6b1000000000000000000008",
+    data: ISODate("2026-11-07T12:00:00.000Z"),
+    status: "EM_TRIAGEM",
+    roupas: [
+      { tipo: "Casaco", tamanho: "M", cor: "Marrom", estado: "Bom" },
+      { tipo: "Meias", tamanho: "39", cor: "Brancas", estado: "Novo" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  },
+  {
+    _id: ObjectId("6b2000000000000000000008"),
+    doadorId: "6b1000000000000000000003",
+    responsavelId: "6b1000000000000000000002",
+    data: ISODate("2026-11-08T12:00:00.000Z"),
+    status: "PENDENTE",
+    roupas: [
+      { tipo: "Regata", tamanho: "P", cor: "Amarela", estado: "Bom" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  },
+  {
+    _id: ObjectId("6b2000000000000000000009"),
+    doadorId: "6b1000000000000000000004",
+    responsavelId: "6b1000000000000000000005",
+    data: ISODate("2026-11-09T12:00:00.000Z"),
+    status: "DISPONIVEL",
+    roupas: [
+      { tipo: "Calça", tamanho: "44", cor: "Jeans", estado: "Bom" },
+      { tipo: "Camiseta", tamanho: "GG", cor: "Preta", estado: "Ótimo" },
+      { tipo: "Boné", tamanho: "Único", cor: "Preto", estado: "Bom" },
+      { tipo: "Tênis", tamanho: "41", cor: "Preto", estado: "Bom" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  },
+  {
+    _id: ObjectId("6b2000000000000000000010"),
+    doadorId: "6b1000000000000000000006",
+    responsavelId: "6b1000000000000000000010",
+    data: ISODate("2026-11-10T12:00:00.000Z"),
+    status: "CONCLUIDA",
+    roupas: [
+      { tipo: "Cardigã", tamanho: "M", cor: "Vinho", estado: "Ótimo" },
+      { tipo: "Shorts", tamanho: "40", cor: "Azul", estado: "Bom" }
+    ],
+    _class: "AEP.ClothIn.models.Doacao"
+  }
+]);
+```
+
+**Conferir os registros inseridos:**
+
+```javascript
+db.usuarios.countDocuments();
+db.doacoes.countDocuments();
+
+db.usuarios.find();
+db.doacoes.find();
+```
+
+Os comandos acima inserem os dados de demonstração. Caso sejam executados novamente, os mesmos identificadores já existirão e o MongoDB poderá retornar erro de chave duplicada. Para recomeçar a demonstração, remova os registros de demonstração antes de executar novamente.
+
+## 8. Como executar o projeto
+
+### 8.1. Requisitos
+
+Para executar o projeto, é necessário possuir:
 
 - Java 21;
 - Maven;
-- IntelliJ IDEA;
-- MongoDB.
+- MongoDB;
+- IntelliJ IDEA.
 
-Verifique a versão do Java instalada:
+Verifique a instalação do Java:
 
 ```bash
 java -version
 ```
 
-O resultado deve indicar uma versão 21 do Java.
-
-### 2. Clonar o projeto
-
-Clone o repositório:
+### 8.2. Clonar o repositório
 
 ```bash
 git clone https://github.com/SeitiHsm/AEP1_esoft6C.git
@@ -260,221 +512,159 @@ git clone https://github.com/SeitiHsm/AEP1_esoft6C.git
 Entre na pasta do projeto:
 
 ```bash
-cd AEP1_esoft6C
+cd AEP1_esoft6C/ClothIn
 ```
 
-A aplicação está localizada dentro da pasta:
+Abra a pasta `ClothIn` no IntelliJ IDEA e aguarde o carregamento das dependências Maven.
 
-```text
-ClothIn
-```
+### 8.3. Configurar o MongoDB
 
-Abra essa pasta utilizando o IntelliJ IDEA.
-
-Aguarde o carregamento das dependências do Maven e verifique se o projeto está utilizando Java 21.
-
-### 3. Preparar o MongoDB
-
-O projeto utiliza uma instância local do MongoDB, configurada no arquivo:
+Verifique o arquivo:
 
 ```text
 src/main/resources/application.properties
 ```
 
-O banco de dados utilizado é:
+Confirme que a conexão está apontando para o banco `ClothIn` e que o MongoDB está em execução.
 
-```text
-ClothIn
-```
+Após inserir os dados de demonstração, as coleções estarão disponíveis para a aplicação.
 
-As coleções principais são:
+### 8.4. Iniciar a aplicação
 
-```text
-usuarios
-doacoes
-```
-
-#### Importando os dados de demonstração
-
-Para facilitar a execução e a avaliação em outro computador, o projeto disponibiliza um pacote com dados de demonstração do MongoDB.
-
-O arquivo contém os dados necessários para iniciar a demonstração das funcionalidades, incluindo usuários e doações.
-
-**Download do pacote:**
-
-[📥 Baixar ClothIn_Dados.zip](database/ClothIn_Dados.zip)
-
-Após baixar o arquivo:
-
-1. Extraia o conteúdo do ZIP;
-2. Inicie o MongoDB local;
-3. Abra o terminal na pasta onde está o arquivo `stream.js`;
-4. Execute:
-
-```bash
-mongosh "mongodb://localhost:27017/ClothIn" stream.js
-```
-
-O script irá inserir ou atualizar os documentos de demonstração nas coleções `usuarios` e `doacoes`.
-
-Os dados de demonstração utilizam identificadores que preservam os relacionamentos entre usuários e doações.
-
-### 4. Executar a aplicação
-
-No IntelliJ IDEA, localize a classe principal:
+No IntelliJ, localize:
 
 ```text
 src/main/java/AEP/ClothIn/ClothInApplication.java
 ```
 
-Abra a classe e clique no botão de execução ao lado do método `main`.
+Execute a classe principal pelo botão Run.
 
-Também é possível iniciar a aplicação pelo Maven, dentro da pasta `ClothIn`:
+Também é possível iniciar pelo Maven:
 
 ```bash
 mvn spring-boot:run
 ```
 
-Após a inicialização do Spring Boot, a aplicação estará disponível em:
+Após a inicialização, acesse:
 
 ```text
 http://localhost:8080/
 ```
 
-A interface web poderá ser acessada pelo navegador.
+A interface web estará disponível no navegador.
 
-**Observação:** o MongoDB deve estar em execução antes de iniciar a aplicação. Caso a porta 8080 já esteja sendo utilizada por outro processo, será necessário encerrá-lo antes de executar o ClothIn.
+**Observação:** caso a porta 8080 esteja ocupada, encerre a aplicação que já está utilizando essa porta antes de iniciar outra instância.
 
-## Testes automatizados
+## 9. Funcionalidades
 
-O projeto possui testes automatizados utilizando **JUnit 5**, **Mockito** e recursos de teste do Spring Boot, incluindo `@WebMvcTest`.
+### Gerenciamento de usuários
 
-Os testes estão localizados em:
+- Cadastro de usuários;
+- Consulta de usuários;
+- Atualização de usuários;
+- Exclusão de usuários;
+- Identificação de doadores e responsáveis.
 
-```text
-src/test/java/AEP/ClothIn
-```
+### Gerenciamento de doações
 
-As classes de teste implementadas são:
+- Cadastro de doações;
+- Consulta de doações;
+- Atualização de doações;
+- Exclusão de doações;
+- Associação de doadores e responsáveis;
+- Inclusão de várias roupas em uma mesma doação;
+- Atualização do status;
+- Filtros por doador, responsável e status.
 
-```text
-DoacaoControllerTest
-DoacaoServiceTest
-RoupaControllerTest
-RoupaServiceTest
-UsuarioControllerTest
-UsuarioServiceTest
-```
+### Painel principal
 
-Os testes verificam o comportamento das regras de negócio e das rotas REST implementadas nas camadas de `Controller` e `Service` para usuários, roupas e doações.
+Apresenta informações gerais sobre as doações e permite acompanhar os registros cadastrados.
 
-### Executando os testes pelo IntelliJ IDEA
+## 10. API REST
 
-Para executar os testes:
-
-1. Abra a pasta `src/test/java/AEP/ClothIn`;
-2. Clique com o botão direito sobre a pasta;
-3. Selecione a opção de execução de todos os testes.
-
-Também é possível executar uma classe individual ou utilizar a opção **Run All Tests with Coverage** para visualizar a cobertura diretamente na IDE.
-
-### Executando os testes pelo Maven
-
-Dentro da pasta `ClothIn`, execute:
-
-```bash
-./mvnw clean test
-```
-
-No Windows, também é possível utilizar:
-
-```cmd
-mvnw.cmd clean test
-```
-
-O Maven irá compilar o projeto e executar os testes automatizados, gerando o relatório de cobertura por meio do **JaCoCo**.
-
-Quando todos os testes forem executados sem falhas, o terminal deverá apresentar:
-
-```text
-BUILD SUCCESS
-```
-
-### Relatório de cobertura JaCoCo
-
-Após a execução dos testes, o relatório HTML de cobertura será gerado em:
-
-```text
-target/site/jacoco/index.html
-```
-
-Abra o arquivo `index.html` no navegador para consultar os percentuais de cobertura de:
-
-- Instruções;
-- Ramificações;
-- Linhas;
-- Métodos;
-- Classes.
-
-O relatório permite verificar quais partes do código foram executadas durante os testes automatizados.
-
-A meta estabelecida para a entrega é de **no mínimo 70% de cobertura**, conforme os requisitos da AEP.
-
-**Resultado da cobertura:** inserir aqui o percentual real obtido no relatório JaCoCo antes da entrega.
-
-### Fluxo dos testes
-
-```text
-Preparar dados e mocks
-         ↓
-Executar método do Service
-ou requisição MockMvc
-         ↓
-Verificar chamadas ao Repository / Service
-         ↓
-Confirmar retorno, status HTTP
-ou exceção esperada
-```
-
-Os testes isolam dependências utilizando mocks para validar fluxos de sucesso, exceções e regras de negócio.
-
-## API REST
-
-Além da interface web, o projeto disponibiliza uma API REST para realizar as operações de usuários e doações.
+O projeto disponibiliza uma API REST para operações de usuários e doações.
 
 ### Endpoints de usuários
 
 | Método | Endpoint | Descrição |
 |---|---|---|
-| `POST` | `/usuarios` | Cadastrar um usuário |
-| `GET` | `/usuarios` | Listar usuários |
-| `GET` | `/usuarios/{id}` | Buscar usuário pelo ID |
-| `PUT` | `/usuarios/{id}` | Atualizar um usuário |
-| `DELETE` | `/usuarios/{id}` | Excluir um usuário |
+| POST | `/usuarios` | Cadastrar usuário |
+| GET | `/usuarios` | Listar usuários |
+| GET | `/usuarios/{id}` | Buscar usuário por ID |
+| PUT | `/usuarios/{id}` | Atualizar usuário |
+| DELETE | `/usuarios/{id}` | Excluir usuário |
 
 ### Endpoints de doações
 
 | Método | Endpoint | Descrição |
 |---|---|---|
-| `POST` | `/doacoes` | Cadastrar uma doação |
-| `GET` | `/doacoes` | Listar doações |
-| `GET` | `/doacoes/{id}` | Buscar doação pelo ID |
-| `GET` | `/doacoes/doador/{doadorId}` | Listar doações de um doador |
-| `GET` | `/doacoes/responsavel/{responsavelId}` | Listar doações de um responsável |
-| `GET` | `/doacoes/status/{status}` | Filtrar doações pelo status |
-| `PUT` | `/doacoes/{id}` | Atualizar uma doação |
-| `DELETE` | `/doacoes/{id}` | Excluir uma doação |
+| POST | `/doacoes` | Cadastrar doação |
+| GET | `/doacoes` | Listar doações |
+| GET | `/doacoes/{id}` | Buscar doação por ID |
+| GET | `/doacoes/doador/{doadorId}` | Listar doações de um doador |
+| GET | `/doacoes/responsavel/{responsavelId}` | Listar doações de um responsável |
+| GET | `/doacoes/status/{status}` | Filtrar por status |
+| PUT | `/doacoes/{id}` | Atualizar doação |
+| DELETE | `/doacoes/{id}` | Excluir doação |
 
 As requisições podem ser verificadas utilizando ferramentas como Postman.
 
-## Estrutura do projeto
+## 11. Testes automatizados
+
+O projeto possui testes automatizados utilizando JUnit 5, Mockito e recursos de teste do Spring Boot.
+
+As classes de teste documentadas são:
+
+```text
+src/test/java/AEP/ClothIn/
+├── DoacaoControllerTest
+├── DoacaoServiceTest
+├── RoupaControllerTest
+├── RoupaServiceTest
+├── UsuarioControllerTest
+└── UsuarioServiceTest
+```
+
+Os testes verificam comportamentos das camadas Controller e Service, incluindo operações e regras de negócio.
+
+### 11.1. Executar os testes
+
+No terminal, dentro da pasta `ClothIn`, execute:
+
+No Windows:
+
+```cmd
+mvnw.cmd clean test
+```
+
+Ou, caso o Maven esteja instalado globalmente:
+
+```bash
+mvn clean test
+```
+
+A execução deverá apresentar `BUILD SUCCESS` quando os testes forem concluídos sem falhas.
+
+### 11.2. Cobertura de testes com JaCoCo
+
+O projeto utiliza JaCoCo para gerar o relatório de cobertura dos testes automatizados.
+
+Após executar os testes, verifique se o relatório foi gerado em:
+
+```text
+target/site/jacoco/index.html
+```
+
+Abra esse arquivo no navegador para consultar a cobertura de instruções, linhas, métodos, classes e ramificações.
+
+A AEP exige cobertura mínima de **70%** sobre o código da PoC apresentado na entrega.
+
+**Resultado obtido:** consultar e informar o percentual real apresentado pelo relatório JaCoCo.
+
+## 12. Estrutura do projeto
 
 ```text
 ClothIn
-├── database
-│   └── ClothIn_Dados.zip
-├── docs
-│   └── documentação técnica
 ├── src
 │   ├── main
 │   │   ├── java
@@ -502,52 +692,29 @@ ClothIn
 │                   ├── RoupaServiceTest
 │                   ├── UsuarioControllerTest
 │                   └── UsuarioServiceTest
+├── docs
 ├── pom.xml
 └── README.md
 ```
 
-## Documentação técnica
+## 13. Documentação técnica
 
-A documentação técnica complementar do projeto está disponível na pasta:
+A documentação complementar do projeto está organizada na pasta `docs/`.
 
-```text
-docs/
-```
+O README apresenta as instruções de instalação, execução, testes e estrutura do banco de dados para facilitar a avaliação da PoC.
 
-Ela deve apresentar as informações necessárias para compreender a estrutura da aplicação, sua arquitetura, o funcionamento do banco de dados e as tecnologias utilizadas.
+## 14. Versionamento
 
-## Versionamento
+O projeto utiliza Git para controle de versão e GitHub para armazenamento do código-fonte.
 
-O projeto utiliza **Git** para controle de versão e **GitHub** para armazenamento do código-fonte.
+As alterações são registradas por meio de commits, permitindo acompanhar a evolução do desenvolvimento.
 
-As alterações realizadas durante o desenvolvimento são registradas por meio de commits, permitindo acompanhar a evolução do ClothIn.
+**Versão da segunda entrega:** identificar por meio da tag, release ou commit correspondente à versão final da AEP 2.
 
-Cada entrega deve possuir uma identificação clara da versão correspondente, por meio de tag, release ou commit informado pela equipe.
+## 15. Situação do projeto
 
-**Versão da segunda entrega:** inserir a tag, release ou identificação do commit correspondente à versão final da AEP 2.
+**ClothIn — Segunda entrega da AEP.**
 
-## Escopo da segunda entrega
+A aplicação evoluiu da estrutura inicial de cadastro de roupas para um sistema de gerenciamento de usuários e doações, utilizando MongoDB com múltiplas coleções, relacionamento por identificadores e documentos incorporados.
 
-A segunda entrega representa a evolução da primeira versão funcional do ClothIn.
-
-Enquanto a primeira entrega tinha como foco o CRUD básico de roupas, esta etapa amplia a aplicação com:
-
-- Gerenciamento de usuários;
-- Gerenciamento de doações;
-- Associação entre usuários e doações;
-- Armazenamento de várias peças em uma mesma doação por meio de documentos incorporados;
-- Ampliação da estrutura do banco de dados NoSQL;
-- Interface web para utilização do sistema;
-- API REST para usuários e doações;
-- Testes automatizados utilizando JUnit 5 e Mockito;
-- Relatório de cobertura de testes com JaCoCo;
-- Documentação técnica e instruções de execução;
-- Pacote de dados de demonstração do MongoDB.
-
-## Situação atual
-
-**Segunda versão do ClothIn — AEP 2.**
-
-O sistema possui funcionalidades para gerenciamento de usuários e doações, persistência no MongoDB, interface web, API REST e testes automatizados.
-
-A entrega também contempla documentação técnica, instruções para reprodução do ambiente e evidências de execução dos testes e da cobertura de código.
+O projeto contempla interface web, API REST, persistência de dados, testes automatizados e documentação para execução e avaliação.
