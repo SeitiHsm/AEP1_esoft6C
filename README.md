@@ -2,15 +2,15 @@
 
 Sistema para cadastro e gerenciamento de roupas destinadas à doação e reutilização, desenvolvido como parte da Atividade de Estudo Programado (AEP).
 
+O **ClothIn** busca facilitar o gerenciamento de doações de roupas, permitindo organizar os usuários envolvidos, registrar peças e acompanhar o andamento das doações.
+
 ## Problema
 
 O descarte de roupas que ainda estão em condições de uso contribui para o desperdício de recursos e reduz as possibilidades de reutilização dessas peças.
 
 Além disso, a falta de uma forma organizada para registrar e gerenciar roupas destinadas à doação pode dificultar o controle desses itens.
 
-O ClothIn surge como uma proposta inicial para auxiliar nesse gerenciamento, permitindo cadastrar, consultar, atualizar e excluir informações de roupas que podem ser destinadas à doação e reutilização.
-
-Nesta primeira entrega, foi desenvolvida uma primeira versão funcional da solução, com foco no CRUD básico de roupas e na persistência dos dados utilizando um banco de dados NoSQL.
+O ClothIn surge como uma solução para auxiliar nesse gerenciamento, permitindo cadastrar usuários, registrar doações, incluir várias peças em uma mesma doação e acompanhar seus respectivos status.
 
 ## ODS
 
@@ -18,73 +18,68 @@ O projeto está relacionado ao **ODS 12 – Consumo e Produção Responsáveis**
 
 O ODS 12 busca promover padrões de consumo e produção mais sustentáveis, incentivando o uso consciente dos recursos e a redução de desperdícios.
 
-O ClothIn contribui com esse objetivo ao incentivar a reutilização de roupas e possibilitar o gerenciamento das peças destinadas à doação, ajudando a evitar que roupas em condições de uso sejam descartadas desnecessariamente.
+O ClothIn contribui com esse objetivo ao incentivar a reutilização de roupas e facilitar o gerenciamento das peças destinadas à doação.
 
 ## Objetivo
 
-O objetivo desta primeira versão do ClothIn é disponibilizar uma aplicação funcional capaz de realizar o cadastro e o gerenciamento básico de roupas destinadas à doação.
+O objetivo do ClothIn é disponibilizar uma aplicação para organizar o processo de doação de roupas, desde o cadastro dos usuários até o acompanhamento das doações.
 
 A aplicação permite:
 
-- Cadastrar roupas;
-- Listar roupas cadastradas;
-- Buscar uma roupa pelo ID;
-- Atualizar uma roupa;
-- Excluir uma roupa;
+- Cadastrar, consultar, atualizar e excluir usuários;
+- Identificar usuários como doadores ou responsáveis;
+- Cadastrar e gerenciar doações;
+- Associar um doador e, opcionalmente, um responsável a cada doação;
+- Adicionar várias peças de roupa em uma mesma doação;
+- Atualizar e consultar o status das doações;
+- Filtrar doações por doador, responsável e status;
 - Armazenar os dados utilizando MongoDB;
-- Realizar as operações através de um menu no terminal;
-- Disponibilizar uma API REST para as operações do CRUD.
+- Disponibilizar uma interface web para utilização do sistema;
+- Disponibilizar uma API REST para as operações.
 
 ## Funcionalidades
 
-### Cadastro de roupas
+### Gerenciamento de usuários
 
-Permite cadastrar uma nova roupa informando:
+O sistema permite cadastrar e gerenciar os usuários envolvidos nas doações.
 
-- Tipo;
-- Tamanho;
-- Cor;
-- Estado de conservação.
+Cada usuário possui:
 
-### Listagem de roupas
+- Nome;
+- E-mail;
+- Telefone;
+- Tipo de usuário.
 
-Permite visualizar todas as roupas cadastradas no sistema.
+Os tipos disponíveis são:
 
-### Busca por ID
+- `DOADOR`: usuário responsável por realizar a doação;
+- `RESPONSAVEL`: usuário responsável por acompanhar ou gerenciar a doação.
 
-Permite localizar uma roupa específica utilizando seu identificador.
+### Gerenciamento de doações
 
-### Atualização
+O sistema permite registrar e gerenciar doações, associando cada uma a um doador e, opcionalmente, a um responsável.
 
-Permite alterar os dados de uma roupa já cadastrada.
+Uma doação pode conter várias peças de roupa, permitindo registrar diferentes itens em uma única operação.
 
-### Exclusão
+### Acompanhamento de status
 
-Permite remover uma roupa cadastrada, solicitando confirmação antes da exclusão.
+As doações possuem os seguintes status:
 
-## Dados de uma roupa
-
-Cada roupa possui os seguintes campos:
-
-| Campo | Descrição |
+| Status | Descrição |
 |---|---|
-| `id` | Identificador da roupa |
-| `tipo` | Tipo da peça |
-| `tamanho` | Tamanho da peça |
-| `cor` | Cor da peça |
-| `estado` | Estado de conservação |
+| `PENDENTE` | Doação registrada e aguardando recebimento |
+| `RECEBIDA` | Doação recebida |
+| `EM_TRIAGEM` | Doação em processo de avaliação |
+| `DISPONIVEL` | Peças disponíveis para reutilização |
+| `CONCLUIDA` | Processo da doação concluído |
 
-Exemplo de documento armazenado no MongoDB:
+### Painel principal
 
-```json
-{
-  "_id": "id-gerado-pelo-mongodb",
-  "tipo": "Camiseta",
-  "tamanho": "M",
-  "cor": "Azul",
-  "estado": "Bom"
-}
-```
+A interface apresenta informações gerais sobre as doações, permitindo visualizar indicadores e acompanhar a situação dos registros.
+
+### Interface web
+
+O ClothIn possui uma interface web para facilitar a utilização das funcionalidades de usuários e doações, sem depender de operações diretamente pelo terminal.
 
 ## Tecnologias
 
@@ -93,66 +88,160 @@ Exemplo de documento armazenado no MongoDB:
 - **Spring Web**
 - **Spring Data MongoDB**
 - **MongoDB**
+- **HTML**
+- **CSS**
+- **JavaScript**
 - **Maven**
 - **JUnit 5**
 - **Mockito**
+- **JaCoCo**
 - **IntelliJ IDEA**
 - **Git e GitHub**
 
 ## Arquitetura
 
-O projeto utiliza uma organização em camadas, separando as responsabilidades de cada parte da aplicação.
+O projeto utiliza uma organização em camadas, separando as responsabilidades da aplicação.
 
 O fluxo principal é:
 
 ```text
-Menu / Requisição
-       ↓
-   Controller
-       ↓
-     Service
-       ↓
-   Repository
-       ↓
-    MongoDB
+Interface Web / Requisição HTTP
+              ↓
+          Controller
+              ↓
+           Service
+              ↓
+         Repository
+              ↓
+            MongoDB
 ```
 
 ### Model
 
-A classe `Roupa` representa os dados de uma roupa que será armazenada no MongoDB.
+Representa as entidades e estruturas de dados utilizadas pela aplicação.
+
+Entre os principais modelos estão:
+
+- `Usuario`: representa os usuários cadastrados;
+- `Doacao`: representa uma doação;
+- `RoupaDoacao`: representa uma peça de roupa incorporada dentro de uma doação.
 
 ### Controller
 
-A camada `Controller` recebe as requisições da API e direciona as operações para a camada de serviço.
+Recebe as requisições HTTP da API REST e direciona as operações para a camada de serviço.
 
 ### Service
 
-A camada `Service` concentra as operações realizadas sobre as roupas, como criar, listar, buscar, atualizar e deletar.
+Concentra as regras de negócio, validações e operações realizadas sobre usuários e doações.
 
 ### Repository
 
-A camada `Repository` realiza a comunicação entre a aplicação e o MongoDB utilizando o `MongoRepository` do Spring Data MongoDB.
+Realiza a comunicação com o MongoDB utilizando o Spring Data MongoDB.
 
-### Console
+### Interface Web
 
-A aplicação possui um menu de interação pelo terminal que permite executar as operações do CRUD.
+A interface permite utilizar as funcionalidades do sistema por meio de páginas HTML, estilizadas com CSS e integradas ao backend através de JavaScript.
 
-# Instruções básicas de execução
+## Estrutura do banco de dados MongoDB
 
-## 1. IntelliJ IDEA
+O ClothIn utiliza o **MongoDB** como banco de dados NoSQL.
 
-### Requisitos
+Nesta segunda entrega, a estrutura foi ampliada para trabalhar com duas coleções principais:
+
+```text
+ClothIn
+├── usuarios
+└── doacoes
+```
+
+### Coleção `usuarios`
+
+Armazena os dados dos usuários cadastrados no sistema.
+
+| Campo | Descrição |
+|---|---|
+| `_id` | Identificador do usuário |
+| `nome` | Nome do usuário |
+| `email` | E-mail do usuário |
+| `telefone` | Telefone do usuário |
+| `tipoUsuario` | Tipo do usuário: `DOADOR` ou `RESPONSAVEL` |
+
+Exemplo de documento:
+
+```json
+{
+  "_id": "ID_DO_USUARIO",
+  "nome": "Maria",
+  "email": "maria@email.com",
+  "telefone": "44999999999",
+  "tipoUsuario": "DOADOR"
+}
+```
+
+### Coleção `doacoes`
+
+Armazena as doações registradas no sistema.
+
+| Campo | Descrição |
+|---|---|
+| `_id` | Identificador da doação |
+| `doadorId` | Identificador do usuário doador |
+| `responsavelId` | Identificador do responsável, quando associado |
+| `data` | Data da doação |
+| `status` | Situação atual da doação |
+| `roupas` | Lista de peças incorporadas à doação |
+
+Exemplo de documento:
+
+```json
+{
+  "_id": "ID_DA_DOACAO",
+  "doadorId": "ID_DO_USUARIO",
+  "responsavelId": "ID_DO_RESPONSAVEL",
+  "data": "2026-11-09",
+  "status": "RECEBIDA",
+  "roupas": [
+    {
+      "tipo": "Camiseta",
+      "tamanho": "G",
+      "cor": "Azul",
+      "estado": "Bom"
+    },
+    {
+      "tipo": "Calça",
+      "tamanho": "G",
+      "cor": "Preta",
+      "estado": "Ótimo"
+    }
+  ]
+}
+```
+
+### Relacionamento entre as coleções
+
+O relacionamento entre usuários e doações é realizado por meio dos identificadores dos usuários.
+
+- Um usuário do tipo `DOADOR` pode estar associado a várias doações.
+- Cada doação possui um doador identificado por `doadorId`.
+- Uma doação pode possuir um responsável identificado por `responsavelId`.
+- Uma doação pode conter várias peças de roupa dentro do campo `roupas`.
+
+As peças são armazenadas como documentos incorporados (*embedded documents*) dentro da própria coleção `doacoes`, não sendo necessário criar uma coleção separada para cada peça.
+
+Esse modelo permite manter os dados das roupas agrupados com a doação à qual pertencem.
+
+## Instruções básicas de execução
+
+### 1. Requisitos
 
 Para executar o projeto, é necessário utilizar:
 
-- **Java 21**
-- **Maven**
-- **IntelliJ IDEA**
-- **MongoDB**
+- Java 21;
+- Maven;
+- IntelliJ IDEA;
+- MongoDB.
 
-A versão utilizada no projeto é o **Java 21**. Certifique-se de que o IntelliJ IDEA está utilizando essa versão para executar a aplicação.
-
-Para verificar a versão do Java instalada no computador, execute no terminal:
+Verifique a versão do Java instalada:
 
 ```bash
 java -version
@@ -160,17 +249,15 @@ java -version
 
 O resultado deve indicar uma versão 21 do Java.
 
-### Clonar o projeto
+### 2. Clonar o projeto
 
-O código-fonte do ClothIn está disponível no GitHub.
-
-Clone o repositório utilizando:
+Clone o repositório:
 
 ```bash
 git clone https://github.com/SeitiHsm/AEP1_esoft6C.git
 ```
 
-Depois de clonar, entre na pasta do projeto:
+Entre na pasta do projeto:
 
 ```bash
 cd AEP1_esoft6C
@@ -182,181 +269,85 @@ A aplicação está localizada dentro da pasta:
 ClothIn
 ```
 
-### Abrir no IntelliJ IDEA
+Abra essa pasta utilizando o IntelliJ IDEA.
 
-Abra a pasta `ClothIn` utilizando o IntelliJ IDEA.
+Aguarde o carregamento das dependências do Maven e verifique se o projeto está utilizando Java 21.
 
-O projeto possui um arquivo `pom.xml`, portanto o IntelliJ deverá reconhecer automaticamente o projeto como um projeto Maven.
+### 3. Preparar o MongoDB
 
-Após abrir o projeto:
-
-1. Aguarde o IntelliJ carregar as dependências do Maven;
-2. Verifique se o projeto está utilizando o **Java 21**;
-3. Certifique-se de que o MongoDB está em execução;
-4. Localize a classe principal:
-
-```text
-src/main/java/AEP/ClothIn/ClothInApplication.java
-```
-
-5. Abra a classe `ClothInApplication`;
-6. Clique no botão de execução ▶ ao lado do método `main`;
-7. Selecione **Run 'ClothInApplication'**.
-
-Após a inicialização do Spring Boot, o menu do ClothIn será apresentado no terminal do IntelliJ.
-
-O menu será semelhante a:
-
-```text
-================================
-            CLOTHIN
-   DOE ROUPAS PARA UM PROXIMO!
-================================
-1 - Criar roupa
-2 - Listar roupas
-3 - Buscar roupa por ID
-4 - Atualizar roupa
-5 - Deletar roupa
-0 - Sair
-================================
-Escolha uma opção:
-```
-
-Também é possível executar a aplicação utilizando o Maven. Dentro da pasta `ClothIn`, execute:
-
-```bash
-mvn spring-boot:run
-```
-
-## 2. MongoDB
-
-O ClothIn utiliza o **MongoDB** como banco de dados NoSQL.
-
-Nesta primeira entrega, o projeto utiliza uma única coleção:
-
-```text
-roupas
-```
-
-Os documentos possuem uma estrutura simples e homogênea.
-
-### Configuração utilizada pela aplicação
-
-A configuração da conexão com o MongoDB está localizada no arquivo:
+O projeto utiliza uma instância local do MongoDB, configurada no arquivo:
 
 ```text
 src/main/resources/application.properties
 ```
 
-A aplicação deve utilizar a instância do MongoDB configurada nesse arquivo.
-
-### Preparando o MongoDB para executar o projeto
-
-Caso o avaliador esteja executando o projeto em outro computador, será necessário possuir o MongoDB instalado e em execução.
-
-Após iniciar o MongoDB, abra o MongoDB Compass e conecte-se à mesma instância configurada no `application.properties`.
-
-A coleção utilizada pelo projeto é:
+O banco de dados utilizado é:
 
 ```text
-roupas
+ClothIn
 ```
 
-O banco de dados utilizado pela aplicação será criado pelo MongoDB conforme os primeiros dados forem persistidos.
-
-Não é necessário cadastrar os documentos manualmente antes de executar o projeto.
-
-### Realizando o primeiro cadastro
-
-Depois de iniciar o ClothIn pelo IntelliJ IDEA, selecione:
+As coleções principais são:
 
 ```text
-1 - Criar roupa
+usuarios
+doacoes
 ```
 
-Informe os dados solicitados.
+#### Importando os dados de demonstração
 
-Exemplo:
+Para facilitar a execução e a avaliação em outro computador, o projeto disponibiliza um pacote com dados de demonstração do MongoDB.
+
+O arquivo contém os dados necessários para iniciar a demonstração das funcionalidades, incluindo usuários e doações.
+
+**Download do pacote:**
+
+[📥 Baixar ClothIn_Dados.zip](database/ClothIn_Dados.zip)
+
+Após baixar o arquivo:
+
+1. Extraia o conteúdo do ZIP;
+2. Inicie o MongoDB local;
+3. Abra o terminal na pasta onde está o arquivo `stream.js`;
+4. Execute:
+
+```bash
+mongosh "mongodb://localhost:27017/ClothIn" stream.js
+```
+
+O script irá inserir ou atualizar os documentos de demonstração nas coleções `usuarios` e `doacoes`.
+
+Os dados de demonstração utilizam identificadores que preservam os relacionamentos entre usuários e doações.
+
+### 4. Executar a aplicação
+
+No IntelliJ IDEA, localize a classe principal:
 
 ```text
-Tipo: Camiseta
-Tamanho: M
-Cor: Azul
-Estado: Bom
+src/main/java/AEP/ClothIn/ClothInApplication.java
 ```
 
-Após o cadastro, o sistema apresentará:
+Abra a classe e clique no botão de execução ao lado do método `main`.
+
+Também é possível iniciar a aplicação pelo Maven, dentro da pasta `ClothIn`:
+
+```bash
+mvn spring-boot:run
+```
+
+Após a inicialização do Spring Boot, a aplicação estará disponível em:
 
 ```text
-Roupa cadastrada com sucesso!
-ID gerado: ID_DA_ROUPA
+http://localhost:8080/
 ```
 
-O ID será gerado automaticamente pelo MongoDB.
+A interface web poderá ser acessada pelo navegador.
 
-### Conferindo o cadastro no MongoDB Compass
+**Observação:** o MongoDB deve estar em execução antes de iniciar a aplicação. Caso a porta 8080 já esteja sendo utilizada por outro processo, será necessário encerrá-lo antes de executar o ClothIn.
 
-Depois de realizar o cadastro, abra o MongoDB Compass.
+## Testes automatizados
 
-Acesse o banco utilizado pelo projeto e localize a coleção:
-
-```text
-roupas
-```
-
-Dentro da coleção, o documento cadastrado deverá aparecer.
-
-Um documento poderá ser semelhante a:
-
-```json
-{
-  "_id": "68xxxxxxxxxxxxxxxxxxxxxx",
-  "tipo": "Camiseta",
-  "tamanho": "M",
-  "cor": "Azul",
-  "estado": "Bom"
-}
-```
-
-Os valores de `tipo`, `tamanho`, `cor` e `estado` deverão ser os mesmos informados durante o cadastro.
-
-O campo `_id` será gerado automaticamente pelo MongoDB e deverá corresponder ao ID apresentado no terminal após o cadastro.
-
-Dessa forma, o avaliador pode verificar diretamente no MongoDB se a aplicação realmente realizou a persistência do dado.
-
-### Verificando as outras operações
-
-Depois de realizar o primeiro cadastro, também é possível verificar as demais operações do CRUD.
-
-Para listar os documentos cadastrados, selecione:
-
-```text
-2 - Listar roupas
-```
-
-Para buscar uma roupa específica:
-
-```text
-3 - Buscar roupa por ID
-```
-
-Para atualizar uma roupa:
-
-```text
-4 - Atualizar roupa
-```
-
-Para excluir uma roupa:
-
-```text
-5 - Deletar roupa
-```
-
-Após realizar uma atualização ou exclusão, o MongoDB Compass pode ser atualizado para verificar se a alteração foi refletida na coleção `roupas`.
-
-## 3. Testes automatizados
-
-O projeto possui testes automatizados utilizando **JUnit 5**, **Mockito** e recursos de teste do Spring Boot (`@WebMvcTest`).
+O projeto possui testes automatizados utilizando **JUnit 5**, **Mockito** e recursos de teste do Spring Boot, incluindo `@WebMvcTest`.
 
 Os testes estão localizados em:
 
@@ -379,152 +370,151 @@ Os testes verificam o comportamento das regras de negócio e das rotas REST impl
 
 ### Executando os testes pelo IntelliJ IDEA
 
-Para executar os testes pelo IntelliJ IDEA:
+Para executar os testes:
 
-1. Abra a pasta:
+1. Abra a pasta `src/test/java/AEP/ClothIn`;
+2. Clique com o botão direito sobre a pasta;
+3. Selecione a opção de execução de todos os testes.
 
-```text
-src/test/java/AEP/ClothIn
-```
+Também é possível executar uma classe individual ou utilizar a opção **Run All Tests with Coverage** para visualizar a cobertura diretamente na IDE.
 
-2. Abra uma das classes de teste, por exemplo:
+### Executando os testes pelo Maven
 
-```text
-RoupaServiceTest
-```
-
-3. Clique no botão ▶ ao lado da classe;
-4. Selecione **Run 'RoupaServiceTest'**.
-
-Também é possível executar um método de teste individual utilizando o botão ▶ ao lado do método.
-
-Para executar todos os testes de uma vez, clique com o botão direito sobre a pasta `src/test/java/AEP/ClothIn` e selecione **Run 'Tests in 'AEP.ClothIn''** (ou **More Run/Debug > Run 'All Tests' with Coverage** para visualizar a cobertura diretamente na IDE).
-
-### Executando os testes e gerando cobertura pelo Maven (JaCoCo)
-
-Outra forma de executar os testes e gerar a evidência reproduzível de cobertura de código é através do Maven.
-
-Abra o terminal dentro da pasta `ClothIn` e execute:
+Dentro da pasta `ClothIn`, execute:
 
 ```bash
 ./mvnw clean test
 ```
 
-O Maven irá compilar o projeto, executar todos os testes automatizados e gerar o relatório de cobertura via **JaCoCo**.
+No Windows, também é possível utilizar:
 
-Ao final da execução, quando todos os testes forem aprovados, o terminal apresentará:
+```cmd
+mvnw.cmd clean test
+```
+
+O Maven irá compilar o projeto e executar os testes automatizados, gerando o relatório de cobertura por meio do **JaCoCo**.
+
+Quando todos os testes forem executados sem falhas, o terminal deverá apresentar:
 
 ```text
 BUILD SUCCESS
 ```
 
-O relatório HTML detalhado de cobertura será gerado em:
+### Relatório de cobertura JaCoCo
+
+Após a execução dos testes, o relatório HTML de cobertura será gerado em:
 
 ```text
 target/site/jacoco/index.html
 ```
 
-Abra o arquivo `index.html` no navegador para conferir os percentuais de cobertura de instruções, ramificações, linhas, métodos e classes (atendendo ao mínimo obrigatório de **70%**).
+Abra o arquivo `index.html` no navegador para consultar os percentuais de cobertura de:
+
+- Instruções;
+- Ramificações;
+- Linhas;
+- Métodos;
+- Classes.
+
+O relatório permite verificar quais partes do código foram executadas durante os testes automatizados.
+
+A meta estabelecida para a entrega é de **no mínimo 70% de cobertura**, conforme os requisitos da AEP.
+
+**Resultado da cobertura:** inserir aqui o percentual real obtido no relatório JaCoCo antes da entrega.
 
 ### Fluxo dos testes
-
-Os testes isolam as dependências utilizando mocks (`@Mock` e `@MockBean`) para validar tanto os fluxos de sucesso quanto as exceções e validações de negócio (como e-mail duplicado, usuário inexistente, doador/responsável inválido e lista de roupas vazia):
 
 ```text
 Preparar dados e mocks
          ↓
-Executar método do Service ou requisição MockMvc
+Executar método do Service
+ou requisição MockMvc
          ↓
 Verificar chamadas ao Repository / Service
          ↓
-Confirmar retorno, status HTTP ou exceção esperada
+Confirmar retorno, status HTTP
+ou exceção esperada
 ```
+
+Os testes isolam dependências utilizando mocks para validar fluxos de sucesso, exceções e regras de negócio.
 
 ## API REST
 
-Além do menu de terminal, o projeto possui uma API REST para realizar as operações do CRUD.
+Além da interface web, o projeto disponibiliza uma API REST para realizar as operações de usuários e doações.
 
-Os endpoints disponíveis são:
+### Endpoints de usuários
 
 | Método | Endpoint | Descrição |
 |---|---|---|
-| `POST` | `/roupas` | Cadastrar uma roupa |
-| `GET` | `/roupas` | Listar todas as roupas |
-| `GET` | `/roupas/{id}` | Buscar uma roupa pelo ID |
-| `PUT` | `/roupas/{id}` | Atualizar uma roupa |
-| `DELETE` | `/roupas/{id}` | Deletar uma roupa |
+| `POST` | `/usuarios` | Cadastrar um usuário |
+| `GET` | `/usuarios` | Listar usuários |
+| `GET` | `/usuarios/{id}` | Buscar usuário pelo ID |
+| `PUT` | `/usuarios/{id}` | Atualizar um usuário |
+| `DELETE` | `/usuarios/{id}` | Excluir um usuário |
 
-As requisições podem ser realizadas utilizando o Postman.
+### Endpoints de doações
 
-### Exemplo de CREATE pela API
+| Método | Endpoint | Descrição |
+|---|---|---|
+| `POST` | `/doacoes` | Cadastrar uma doação |
+| `GET` | `/doacoes` | Listar doações |
+| `GET` | `/doacoes/{id}` | Buscar doação pelo ID |
+| `GET` | `/doacoes/doador/{doadorId}` | Listar doações de um doador |
+| `GET` | `/doacoes/responsavel/{responsavelId}` | Listar doações de um responsável |
+| `GET` | `/doacoes/status/{status}` | Filtrar doações pelo status |
+| `PUT` | `/doacoes/{id}` | Atualizar uma doação |
+| `DELETE` | `/doacoes/{id}` | Excluir uma doação |
 
-```http
-POST http://localhost:8080/roupas
-Content-Type: application/json
-```
-
-Body:
-
-```json
-{
-  "tipo": "Camiseta",
-  "tamanho": "M",
-  "cor": "Azul",
-  "estado": "Bom"
-}
-```
-
-Após realizar o `POST`, o documento poderá ser verificado no MongoDB Compass na coleção `roupas`.
+As requisições podem ser verificadas utilizando ferramentas como Postman.
 
 ## Estrutura do projeto
 
 ```text
 ClothIn
+├── database
+│   └── ClothIn_Dados.zip
+├── docs
+│   └── documentação técnica
 ├── src
 │   ├── main
 │   │   ├── java
 │   │   │   └── AEP
 │   │   │       └── ClothIn
-│   │   │           ├── console
-│   │   │           ├── controllers
+│   │   │           ├── enums
 │   │   │           ├── models
 │   │   │           ├── repositories
-│   │   │           └── services
+│   │   │           ├── services
+│   │   │           ├── controllers
+│   │   │           └── ClothInApplication.java
 │   │   └── resources
-│   │       └── application.properties
-│   │
+│   │       ├── application.properties
+│   │       └── static
+│   │           ├── index.html
+│   │           ├── style.css
+│   │           └── script.js
 │   └── test
 │       └── java
 │           └── AEP
 │               └── ClothIn
+│                   ├── DoacaoControllerTest
+│                   ├── DoacaoServiceTest
 │                   ├── RoupaControllerTest
-│                   └── RoupaServiceTest
-│
+│                   ├── RoupaServiceTest
+│                   ├── UsuarioControllerTest
+│                   └── UsuarioServiceTest
 ├── pom.xml
 └── README.md
 ```
 
-## Escopo da primeira entrega
+## Documentação técnica
 
-Esta versão representa a **primeira versão funcional do ClothIn**.
+A documentação técnica complementar do projeto está disponível na pasta:
 
-O foco desta entrega é apresentar:
+```text
+docs/
+```
 
-- O problema escolhido;
-- A relação do projeto com o ODS 12;
-- Uma primeira versão funcional da solução;
-- Utilização de Java e Spring Boot;
-- Utilização efetiva de um banco de dados NoSQL;
-- Aplicação de conceitos de programação orientada a objetos;
-- Organização do código em camadas;
-- CRUD de uma única coleção MongoDB;
-- Persistência dos dados;
-- Testes automatizados;
-- Versionamento utilizando Git e GitHub.
-
-Nesta primeira etapa, o projeto utiliza uma única coleção com documentos de estrutura simples e homogênea.
-
-Funcionalidades mais avançadas poderão ser desenvolvidas nas próximas etapas do projeto.
+Ela deve apresentar as informações necessárias para compreender a estrutura da aplicação, sua arquitetura, o funcionamento do banco de dados e as tecnologias utilizadas.
 
 ## Versionamento
 
@@ -532,8 +522,32 @@ O projeto utiliza **Git** para controle de versão e **GitHub** para armazenamen
 
 As alterações realizadas durante o desenvolvimento são registradas por meio de commits, permitindo acompanhar a evolução do ClothIn.
 
+Cada entrega deve possuir uma identificação clara da versão correspondente, por meio de tag, release ou commit informado pela equipe.
+
+**Versão da segunda entrega:** inserir a tag, release ou identificação do commit correspondente à versão final da AEP 2.
+
+## Escopo da segunda entrega
+
+A segunda entrega representa a evolução da primeira versão funcional do ClothIn.
+
+Enquanto a primeira entrega tinha como foco o CRUD básico de roupas, esta etapa amplia a aplicação com:
+
+- Gerenciamento de usuários;
+- Gerenciamento de doações;
+- Associação entre usuários e doações;
+- Armazenamento de várias peças em uma mesma doação por meio de documentos incorporados;
+- Ampliação da estrutura do banco de dados NoSQL;
+- Interface web para utilização do sistema;
+- API REST para usuários e doações;
+- Testes automatizados utilizando JUnit 5 e Mockito;
+- Relatório de cobertura de testes com JaCoCo;
+- Documentação técnica e instruções de execução;
+- Pacote de dados de demonstração do MongoDB.
+
 ## Situação atual
 
-**Primeira versão funcional do ClothIn.**
+**Segunda versão do ClothIn — AEP 2.**
 
-O sistema possui o CRUD de roupas integrado ao MongoDB, menu de interação pelo terminal, API REST, organização inicial em camadas e testes automatizados.
+O sistema possui funcionalidades para gerenciamento de usuários e doações, persistência no MongoDB, interface web, API REST e testes automatizados.
+
+A entrega também contempla documentação técnica, instruções para reprodução do ambiente e evidências de execução dos testes e da cobertura de código.
